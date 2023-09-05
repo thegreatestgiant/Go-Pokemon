@@ -11,11 +11,13 @@ type config struct {
 	next          *string
 	current       *string
 	previous      *string
+	pokedex       map[string]pokeapi.Pokemon
 }
 
 func main() {
 	cfg := config{
 		pokeapiClient: pokeapi.NewClient(time.Hour),
+		pokedex:       make(map[string]pokeapi.Pokemon),
 	}
 
 	startRepl(&cfg)
