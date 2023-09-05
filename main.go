@@ -1,5 +1,9 @@
 package main
 
 func main() {
-	startRepl()
+	pokeApiClient := pokeapi.newClient()
+
+	locationAreas, err := pokeApiClient.getLocationAreas()
+
+	// startRepl()
 }
