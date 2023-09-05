@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (c *Client) GetLocationAreas(pageUrl *string) (LocationAreasResp, error) {
+func (c *Client) GetLocationAreas(pageUrl *string) (LocationAreasResp, error, string) {
 	const endpoint = "/location-area"
 	fullUrl := baseUrl + endpoint
 
@@ -23,42 +23,42 @@ func (c *Client) GetLocationAreas(pageUrl *string) (LocationAreasResp, error) {
 
 		err := json.Unmarshal(dat, &respJson)
 		if err != nil {
-			return LocationAreasResp{}, fmt.Errorf("error unmarshaling json: %s", err)
+			return LocationAreasResp{}, fmt.Errorf("error unmarshaling json: %s", err), fullUrl
 		}
 
-		return respJson, nil
+		return respJson, nil, fullUrl
 	}
 
 	fmt.Println("Cache Missed")
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
-		return LocationAreasResp{}, err
+		return LocationAreasResp{}, err, fullUrl
 	}
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return LocationAreasResp{}, err
+		return LocationAreasResp{}, err, fullUrl
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode > 399 {
-		return LocationAreasResp{}, fmt.Errorf("bad status code %v", resp.StatusCode)
+		return LocationAreasResp{}, fmt.Errorf("bad status code %v", resp.StatusCode), fullUrl
 	}
 
 	dat, err = io.ReadAll(resp.Body)
 	if err != nil {
-		return LocationAreasResp{}, err
+		return LocationAreasResp{}, err, fullUrl
 	}
 
 	respJson := LocationAreasResp{}
 
 	err = json.Unmarshal(dat, &respJson)
 	if err != nil {
-		return LocationAreasResp{}, fmt.Errorf("error unmarshaling json: %s", err)
+		return LocationAreasResp{}, fmt.Errorf("error unmarshaling json: %s", err), fullUrl
 	}
 
 	c.cache.Add(fullUrl, dat)
 
-	return respJson, nil
+	return respJson, nil, fullUrl
 }

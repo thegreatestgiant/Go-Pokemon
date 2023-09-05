@@ -9,6 +9,7 @@ import (
 type config struct {
 	pokeapiClient pokeapi.Client
 	next          *string
+	current       *string
 	previous      *string
 }
 
