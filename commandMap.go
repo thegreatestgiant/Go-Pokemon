@@ -5,6 +5,7 @@ import (
 )
 
 func commandMap(cfg *config) error {
+	// Add caching
 	resp, err := cfg.pokeapiClient.GetLocationAreas(cfg.next)
 	if err != nil {
 		return err
