@@ -13,7 +13,7 @@ func commandExplore(cfg *config, args ...string) error {
 
 	area := args[0]
 	if len(args[0]) < 3 {
-		resp, err, _ := cfg.pokeapiClient.GetLocationAreas(cfg.current)
+		resp, _, err := cfg.pokeapiClient.GetLocationAreas(cfg.current)
 		if err != nil {
 			return err
 		}
