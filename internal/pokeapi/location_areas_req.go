@@ -7,9 +7,15 @@ import (
 	"net/http"
 )
 
-func (c *Client) getLocationAreas() (LocationAreasResp, error) {
-	const fullUrl = baseUrl + "/location-area"
-	req, err := http.NewRequest("Get", fullUrl, nil)
+func (c *Client) GetLocationAreas(fullUrl *string) (LocationAreasResp, error) {
+	const endpoint = "/location-area"
+	ourUrl := ""
+	if fullUrl == nil {
+		ourUrl = baseUrl + endpoint
+	} else {
+		ourUrl = *fullUrl
+	}
+	req, err := http.NewRequest("GET", ourUrl, nil)
 	if err != nil {
 		return LocationAreasResp{}, err
 	}

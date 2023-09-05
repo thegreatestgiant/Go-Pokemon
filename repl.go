@@ -10,15 +10,10 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(c *config) error
+	callback    func(*config) error
 }
 
-type config struct {
-	next     string
-	previous string
-}
-
-func startRepl() {
+func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokemon >")
@@ -38,7 +33,10 @@ func startRepl() {
 			continue
 		}
 
-		command.callback(&config{})
+		err := command.callback(cfg)
+		if err != nil {
+			fmt.Printf("error: %v\n", err)
+		}
 	}
 }
 

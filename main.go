@@ -1,9 +1,19 @@
 package main
 
+import (
+	"github.com/thegreatestgiant/Go-Pokemon/internal/pokeapi"
+)
+
+type config struct {
+	pokeapiClient pokeapi.Client
+	next          *string
+	previous      *string
+}
+
 func main() {
-	pokeApiClient := pokeapi.newClient()
+	cfg := config{
+		pokeapiClient: pokeapi.NewClient(),
+	}
 
-	locationAreas, err := pokeApiClient.getLocationAreas()
-
-	// startRepl()
+	startRepl(&cfg)
 }
