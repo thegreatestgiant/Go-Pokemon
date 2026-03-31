@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strings"
 )
@@ -11,6 +12,7 @@ type cliCommand struct {
 	name        string
 	description string
 	callback    func(*config, ...string) error
+	priotity    int
 }
 
 func startRepl(cfg *config) {
@@ -57,41 +59,49 @@ func getCommands() map[string]cliCommand {
 			name:        "help",
 			description: "Displays a help message",
 			callback:    commandHelp,
+			priotity:    math.MinInt,
 		},
 		"map": {
 			name:        "map",
-			description: "displays the names of 20 location areas in the Pokemon world.",
+			description: "Displays the names of 20 location areas in the Pokemon world.",
 			callback:    commandMap,
+			priotity:    10,
 		},
 		"mapb": {
 			name:        "mapb",
-			description: "displays the names of the previous 20 locations in the Pokemon world.",
+			description: "Displays the names of the previous 20 locations in the Pokemon world.",
 			callback:    commandMapb,
+			priotity:    20,
 		},
 		"explore": {
 			name:        "explore {(number of)/location}",
-			description: "list of all the Pokémon in a given area\n    you can either enter the name of the location or the number",
+			description: "List of all the Pokémon in a given area\n    you can either enter the name of the location or the number",
 			callback:    commandExplore,
+			priotity:    30,
 		},
 		"catch": {
 			name:        "catch {Pokemon}",
 			description: "Catches Pokemon adds them to the user's Pokedex.",
 			callback:    commandCatch,
+			priotity:    40,
 		},
 		"inspect": {
 			name:        "inspect {Pokemon}",
 			description: "If the pokemon is in you pokedex then it will print it's stats",
 			callback:    commandInspect,
+			priotity:    50,
 		},
 		"pokedex": {
 			name:        "pokedex",
 			description: "print a list of all the names of the Pokemon you have caught.",
 			callback:    commandPokedex,
+			priotity:    60,
 		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    commandExit,
+			priotity:    math.MaxInt,
 		},
 	}
 }
