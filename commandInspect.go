@@ -17,6 +17,10 @@ func commandInspect(cfg *config, args ...string) error {
 		return fmt.Errorf("you have not caught %s, catch %s to inspect", pokemon, pokemon)
 	}
 
+	if cfg.art {
+		pokedex.PrintPokemonSprite()
+	}
+
 	fmt.Printf("%s %s\n", cfg.themeFunc.Info("Name:"), cfg.themeFunc.Pokemon(pokedex.Name))
 	fmt.Printf("%s %v\n", cfg.themeFunc.Info("Height:"), cfg.themeFunc.Warning(pokedex.Height))
 	fmt.Printf("%s %v\n", cfg.themeFunc.Info("Weight:"), cfg.themeFunc.Warning(pokedex.Weight))

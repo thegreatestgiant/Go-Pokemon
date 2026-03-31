@@ -16,6 +16,7 @@ type config struct {
 	theme         *theme.CLITheme
 	themeFunc     *theme.CLIThemeFunc
 	debug         bool
+	art           bool
 }
 
 func main() {
@@ -28,6 +29,7 @@ func main() {
 		theme:         appTheme,
 		themeFunc:     appThemeFunc,
 		debug:         pokeapi.NewClient(time.Hour).Debug,
+		art:           true,
 	}
 
 	startRepl(&cfg)
