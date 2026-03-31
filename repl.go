@@ -10,6 +10,7 @@ import (
 
 type cliCommand struct {
 	name        string
+	argument    string
 	description string
 	callback    func(*config, ...string) error
 	priotity    int
@@ -18,7 +19,8 @@ type cliCommand struct {
 func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Print("Pokemon >")
+		intro := "Pokemon > "
+		fmt.Printf("%s", ThemeFunc.Prompt(intro))
 
 		scanner.Scan()
 		text := parseInput(scanner.Text())
@@ -31,7 +33,7 @@ func startRepl(cfg *config) {
 
 		command, ok := avaliableCommands[commandName]
 		if !ok {
-			fmt.Println("Enter a valid command")
+			Theme.Error.Printf("Enter a valid command")
 			continue
 		}
 
@@ -42,7 +44,7 @@ func startRepl(cfg *config) {
 
 		err := command.callback(cfg, args...)
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			Theme.Error.Printf("error: %v\n", err)
 		}
 	}
 }
@@ -74,20 +76,23 @@ func getCommands() map[string]cliCommand {
 			priotity:    20,
 		},
 		"explore": {
-			name:        "explore {(number of)/location}",
+			name:        "explore",
+			argument:    " {(number of)/location}",
 			description: "List of all the Pokémon in a given area\n    you can either enter the name of the location or the number",
 			callback:    commandExplore,
 			priotity:    30,
 		},
 		"catch": {
-			name:        "catch {Pokemon}",
+			name:        "catch",
+			argument:    " {Pokemon}",
 			description: "Catches Pokemon adds them to the user's Pokedex.",
 			callback:    commandCatch,
 			priotity:    40,
 		},
 		"inspect": {
-			name:        "inspect {Pokemon}",
-			description: "If the pokemon is in you pokedex then it will print it's stats",
+			name:        "inspect",
+			argument:    " {Pokemon}",
+			description: "If the pokemon is in your pokedex then it will print it's stats",
 			callback:    commandInspect,
 			priotity:    50,
 		},

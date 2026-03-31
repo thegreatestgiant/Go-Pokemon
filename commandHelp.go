@@ -14,10 +14,10 @@ func commandHelp(cfg *config, args ...string) error {
 		return commandSlice[i].priotity < commandSlice[j].priotity
 	})
 
-	fmt.Println("Welcome To Pokemon")
-	fmt.Println("Usage")
+	Theme.Header.Println("Welcome To Pokemon")
+	Theme.Header.Println("Usage")
 	for _, cmd := range commandSlice {
-		fmt.Printf("  - %s: %s\n", cmd.name, cmd.description)
+		fmt.Printf("  - %s%s: %s\n", ThemeFunc.Info(cmd.name), ThemeFunc.Highlight(cmd.argument), cmd.description)
 	}
 	fmt.Println()
 	return nil

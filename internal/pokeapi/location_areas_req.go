@@ -18,7 +18,7 @@ func (c *Client) GetLocationAreas(pageUrl *string) (LocationAreasResp, string, e
 	// Check if url is in cache
 	dat, ok := c.cache.Get(fullUrl)
 	if ok {
-		fmt.Println("Cache Hit!")
+		Theme.Success.Println("Cache Hit!")
 		respJson := LocationAreasResp{}
 
 		err := json.Unmarshal(dat, &respJson)

@@ -16,9 +16,9 @@ func commandMap(cfg *config, args ...string) error {
 	cfg.current = &current
 	cfg.previous = resp.Previous
 
-	fmt.Println("Areas")
+	Theme.Header.Println("Areas")
 	for i, area := range resp.Results {
-		fmt.Printf("  %v. %s\n", i+1, area.Name)
+		fmt.Printf("  %v. %s\n", i+1, ThemeFunc.Location(area.Name))
 	}
 
 	return nil
@@ -38,9 +38,9 @@ func commandMapb(cfg *config, args ...string) error {
 	cfg.current = &current
 	cfg.previous = resp.Previous
 
-	fmt.Println("Areas")
+	Theme.Header.Println("Areas")
 	for i, area := range resp.Results {
-		fmt.Printf("  %v. %s\n", i+1, area.Name)
+		fmt.Printf("  %v. %s\n", i+1, ThemeFunc.Location(area.Name))
 	}
 
 	return nil
