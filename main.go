@@ -15,6 +15,7 @@ type config struct {
 	pokedex       map[string]pokeapi.Pokemon
 	theme         *theme.CLITheme
 	themeFunc     *theme.CLIThemeFunc
+	debug         bool
 }
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 		pokedex:       make(map[string]pokeapi.Pokemon),
 		theme:         appTheme,
 		themeFunc:     appThemeFunc,
+		debug:         pokeapi.NewClient(time.Hour).Debug,
 	}
 
 	startRepl(&cfg)

@@ -11,7 +11,9 @@ func (c *Client) GetPokemon(fullUrl string) (Pokemon, error) {
 	// Check if url is in cache
 	dat, ok := c.cache.Get(fullUrl)
 	if ok {
-		c.theme.Success.Println("Cache Hit!")
+		if c.Debug {
+			c.theme.Success.Println("Cache Hit!")
+		}
 		respJson := Pokemon{}
 
 		err := json.Unmarshal(dat, &respJson)
@@ -22,7 +24,9 @@ func (c *Client) GetPokemon(fullUrl string) (Pokemon, error) {
 		return respJson, nil
 	}
 
-	c.theme.Warning.Println("Cache Missed")
+	if c.Debug {
+		c.theme.Warning.Println("Cache Missed")
+	}
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {

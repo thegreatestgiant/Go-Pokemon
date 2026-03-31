@@ -15,6 +15,7 @@ type Client struct {
 	cache      pokecache.Cache
 	theme      *theme.CLITheme
 	themeFunc  *theme.CLIThemeFunc
+	Debug      bool
 }
 
 func NewClient(cacheInterval time.Duration) Client {
@@ -28,5 +29,6 @@ func NewClient(cacheInterval time.Duration) Client {
 		cache:     pokecache.NewCache(cacheInterval),
 		theme:     appTheme,
 		themeFunc: appThemeFunc,
+		Debug:     false,
 	}
 }

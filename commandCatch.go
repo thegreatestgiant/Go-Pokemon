@@ -22,7 +22,9 @@ func commandCatch(cfg *config, args ...string) error {
 	baseXP := pokemonStruct.BaseExperience
 	threshhold := 50
 	randNum := rand.Intn(pokemonStruct.BaseExperience)
-	fmt.Println(baseXP, threshhold, randNum)
+	if cfg.debug {
+		fmt.Println(baseXP, threshhold, randNum)
+	}
 
 	cfg.theme.Info.Printf("Throwing a Pokeball at %s...", cfg.themeFunc.Pokemon(pokemon))
 	time.Sleep(time.Second)
