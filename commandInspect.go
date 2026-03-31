@@ -17,16 +17,16 @@ func commandInspect(cfg *config, args ...string) error {
 		return fmt.Errorf("you have not caught %s, catch %s to inspect", pokemon, pokemon)
 	}
 
-	fmt.Printf("Name: %s\n", pokedex.Name)
-	fmt.Printf("Height: %v\n", pokedex.Height)
-	fmt.Printf("Weight: %v\n", pokedex.Weight)
-	fmt.Println("Stats:")
+	fmt.Printf("%s %s\n", cfg.themeFunc.Info("Name:"), cfg.themeFunc.Pokemon(pokedex.Name))
+	fmt.Printf("%s %v\n", cfg.themeFunc.Info("Height:"), cfg.themeFunc.Warning(pokedex.Height))
+	fmt.Printf("%s %v\n", cfg.themeFunc.Info("Weight:"), cfg.themeFunc.Warning(pokedex.Weight))
+	cfg.theme.Info.Println("Stats:")
 	for _, stat := range pokedex.Stats {
-		fmt.Printf("  - %s: %v\n", stat.Stat.Name, stat.BaseStat)
+		fmt.Printf("  - %s: %v\n", cfg.themeFunc.Info(stat.Stat.Name), cfg.themeFunc.Warning(stat.BaseStat))
 	}
-	fmt.Println("Types:")
+	cfg.theme.Info.Println("Types:")
 	for _, val := range pokedex.Types {
-		fmt.Printf("  - %s\n", val.Type.Name)
+		fmt.Printf("  - %s\n", cfg.themeFunc.Location(val.Type.Name))
 	}
 
 	return nil

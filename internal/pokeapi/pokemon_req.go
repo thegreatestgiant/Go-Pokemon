@@ -8,11 +8,10 @@ import (
 )
 
 func (c *Client) GetPokemon(fullUrl string) (Pokemon, error) {
-
 	// Check if url is in cache
 	dat, ok := c.cache.Get(fullUrl)
 	if ok {
-		fmt.Println("Cache Hit!")
+		c.theme.Success.Println("Cache Hit!")
 		respJson := Pokemon{}
 
 		err := json.Unmarshal(dat, &respJson)
@@ -23,7 +22,7 @@ func (c *Client) GetPokemon(fullUrl string) (Pokemon, error) {
 		return respJson, nil
 	}
 
-	fmt.Println("Cache Missed")
+	c.theme.Warning.Println("Cache Missed")
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {

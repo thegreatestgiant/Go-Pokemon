@@ -20,7 +20,7 @@ func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		intro := "Pokemon > "
-		fmt.Printf("%s", ThemeFunc.Prompt(intro))
+		fmt.Printf("%s", cfg.themeFunc.Prompt(intro))
 
 		scanner.Scan()
 		text := parseInput(scanner.Text())
@@ -33,7 +33,7 @@ func startRepl(cfg *config) {
 
 		command, ok := avaliableCommands[commandName]
 		if !ok {
-			Theme.Error.Printf("Enter a valid command")
+			cfg.theme.Error.Printf("Enter a valid command")
 			continue
 		}
 
@@ -44,7 +44,7 @@ func startRepl(cfg *config) {
 
 		err := command.callback(cfg, args...)
 		if err != nil {
-			Theme.Error.Printf("error: %v\n", err)
+			cfg.theme.Error.Printf("error: %v\n", err)
 		}
 	}
 }

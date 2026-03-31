@@ -5,9 +5,9 @@ import (
 )
 
 func commandPokedex(cfg *config, args ...string) error {
-	fmt.Println("Your Pokedex:")
+	cfg.theme.Info.Println("Your Pokedex:")
 	for _, pokemon := range cfg.pokedex {
-		fmt.Printf("  - %s\n", pokemon.Name)
+		fmt.Printf("  - %s\n", cfg.themeFunc.Pokemon(pokemon.Name))
 	}
 	return nil
 }

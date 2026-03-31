@@ -11,7 +11,7 @@
 
 Explore the Pokémon world, battle the odds to catch wild Pokémon, and build your ultimate Pokédex — all powered by a live REST API, an in-memory caching layer, and a hand-rolled REPL engine.
 
-[Getting Started](#-installation--setup) · [How to Play](#-how-to-play) · [Architecture](#-architecture) · [Tech Stack](#-tech-stack--go-patterns-used)
+[Getting Started](#%EF%B8%8F-installation--setup) · [How to Play](#%EF%B8%8F-how-to-play) · [Architecture](#%EF%B8%8F-architecture) · [Tech Stack](#%EF%B8%8F-tech-stack--go-patterns-used)
 
 </div>
 
@@ -75,7 +75,7 @@ Pokemon > pokedex
 
 ### Starting the Game
 
-Once running (see [Installation](#-installation--setup)), you'll be greeted with the prompt:
+Once running (see [Installation](#%EF%B8%8F-installation--setup)), you'll be greeted with the prompt:
 
 ```
 Pokemon >
@@ -115,6 +115,7 @@ This fetches the first 20 location areas from the Pokémon world. Run it again t
 ```
 Pokemon > explore 5
 ```
+
 Uses the 5th result from your last `map` call. Alternatively, use the full area name:
 
 ```
@@ -272,7 +273,6 @@ This project was built using only the **Go standard library** — no third-party
 
 ---
 
-
 ## 🗺️ Roadmap
 
 Potential features for future development:
@@ -283,7 +283,7 @@ Potential features for future development:
 - [ ] **Pokémon release** — Remove a Pokémon from your Pokédex
 - [ ] **Pokémon evolution** — Trigger evolutions based on in-game conditions
 - [ ] **`inspect --moves` flag** — Display the full move list from the already-fetched data
-- [ ] **Colored terminal output** — Use ANSI codes or a lightweight package for a richer UX
+- [x] **Colored terminal output** — Use ANSI codes or a lightweight package for a richer UX
 - [ ] **Interactive TUI** — Upgrade the REPL to a full terminal UI with [Bubble Tea](https://github.com/charmbracelet/bubbletea)
 
 ---

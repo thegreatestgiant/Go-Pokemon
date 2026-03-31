@@ -16,9 +16,9 @@ func commandMap(cfg *config, args ...string) error {
 	cfg.current = &current
 	cfg.previous = resp.Previous
 
-	Theme.Header.Println("Areas")
+	cfg.theme.Header.Println("Areas")
 	for i, area := range resp.Results {
-		fmt.Printf("  %v. %s\n", i+1, ThemeFunc.Location(area.Name))
+		fmt.Printf("  %v. %s\n", i+1, cfg.themeFunc.Location(area.Name))
 	}
 
 	return nil
@@ -26,7 +26,7 @@ func commandMap(cfg *config, args ...string) error {
 
 func commandMapb(cfg *config, args ...string) error {
 	if cfg.previous == nil {
-		return errors.New("you are on the first page so there are no previous locations")
+		return errors.New("you are on the first page. There are no previous locations")
 	}
 
 	resp, current, err := cfg.pokeapiClient.GetLocationAreas(cfg.previous)
@@ -38,9 +38,9 @@ func commandMapb(cfg *config, args ...string) error {
 	cfg.current = &current
 	cfg.previous = resp.Previous
 
-	Theme.Header.Println("Areas")
+	cfg.theme.Header.Println("Areas")
 	for i, area := range resp.Results {
-		fmt.Printf("  %v. %s\n", i+1, ThemeFunc.Location(area.Name))
+		fmt.Printf("  %v. %s\n", i+1, cfg.themeFunc.Location(area.Name))
 	}
 
 	return nil

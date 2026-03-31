@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"time"
 )
 
 func commandCatch(cfg *config, args ...string) error {
@@ -23,13 +24,14 @@ func commandCatch(cfg *config, args ...string) error {
 	randNum := rand.Intn(pokemonStruct.BaseExperience)
 	fmt.Println(baseXP, threshhold, randNum)
 
-	fmt.Printf("Throwing a Pokeball at %s...", pokemon)
+	cfg.theme.Info.Printf("Throwing a Pokeball at %s...", cfg.themeFunc.Pokemon(pokemon))
+	time.Sleep(time.Second)
 	if randNum > threshhold {
-		return fmt.Errorf("failed to catch %s", pokemon)
+		return fmt.Errorf("failed to catch %s", cfg.themeFunc.Pokemon(pokemon))
 	}
 
 	cfg.pokedex[pokemon] = pokemonStruct
-	fmt.Printf("%s was caught!!\n", pokemon)
+	cfg.theme.Success.Printf("%s %s\n", cfg.themeFunc.Pokemon(pokemon), cfg.themeFunc.Success("was caught!!"))
 
 	return nil
 }
