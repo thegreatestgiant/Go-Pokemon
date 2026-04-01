@@ -13,6 +13,9 @@ func commandCatch(cfg *Config, args ...string) error {
 	}
 
 	pokemon := args[0]
+
+	// TODO: make sure it's in the explore list
+
 	pokemonUrl := "https://pokeapi.co/api/v2/pokemon/" + pokemon
 	pokemonStruct, err := cfg.PokeapiClient.GetPokemon(pokemonUrl)
 	if err != nil {

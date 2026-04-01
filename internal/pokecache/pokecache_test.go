@@ -81,9 +81,7 @@ func TestCache_reapLoop(t *testing.T) {
 		name   string
 		fields fields
 		args   args
-	}{
-		// TODO: Add test cases.
-	}
+	}{}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := &Cache{
@@ -105,9 +103,7 @@ func TestCache_reap(t *testing.T) {
 		name   string
 		fields fields
 		args   args
-	}{
-		// TODO: Add test cases.
-	}
+	}{}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := &Cache{
@@ -126,9 +122,7 @@ func TestNewCache(t *testing.T) {
 		name string
 		args args
 		want Cache
-	}{
-		// TODO: Add test cases.
-	}
+	}{}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := NewCache(tt.args.dur); !reflect.DeepEqual(got, tt.want) {
