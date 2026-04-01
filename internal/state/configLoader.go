@@ -12,10 +12,10 @@ func GetConfig() commands.Config {
 	appTheme := theme.LoadTheme()
 	appThemeFunc := theme.LoadThemeFunc()
 
-	pokedex := []pokeapi.Pokemon{}
-
 	debugging := false
 	showArt := true
+
+	pokedex := loadPokedex(debugging)
 
 	return commands.Config{
 		PokeapiClient: pokeapi.NewClient(time.Hour, debugging),

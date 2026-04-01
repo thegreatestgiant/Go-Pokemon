@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/thegreatestgiant/Go-Pokemon/internal/commands"
+	"github.com/thegreatestgiant/Go-Pokemon/internal/state"
 )
 
 func startRepl(cfg *commands.Config) {
@@ -38,6 +39,11 @@ func startRepl(cfg *commands.Config) {
 		err := command.Callback(cfg, args...)
 		if err != nil {
 			cfg.Theme.Error.Printf("error: %v\n", err)
+		}
+
+		saved := state.SavePokedex(cfg)
+		if !saved && cfg.Debug {
+			cfg.Theme.Error.Println("Didn't save pokedex")
 		}
 	}
 }
