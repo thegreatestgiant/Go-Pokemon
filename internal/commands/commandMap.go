@@ -6,6 +6,7 @@ import (
 )
 
 func commandMap(cfg *Config, args ...string) error {
+	cfg.ExploreList = nil
 	// Add caching
 	resp, current, err := cfg.PokeapiClient.GetLocationAreas(cfg.Next)
 	if err != nil {
@@ -25,6 +26,8 @@ func commandMap(cfg *Config, args ...string) error {
 }
 
 func commandMapb(cfg *Config, args ...string) error {
+	cfg.ExploreList = nil
+
 	if cfg.Previous == nil {
 		return errors.New("you are on the first page. There are no previous locations")
 	}

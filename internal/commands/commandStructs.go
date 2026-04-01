@@ -7,14 +7,19 @@ import (
 
 type Config struct {
 	PokeapiClient pokeapi.Client
-	Next          *string
-	Current       *string
-	Previous      *string
-	Pokedex       []pokeapi.Pokemon
-	Theme         *theme.CLITheme
-	ThemeFunc     *theme.CLIThemeFunc
-	Debug         bool
-	Art           bool
+
+	Next     *string
+	Current  *string
+	Previous *string
+
+	Pokedex     []pokeapi.Pokemon
+	ExploreList []string
+
+	Theme     *theme.CLITheme
+	ThemeFunc *theme.CLIThemeFunc
+
+	Debug bool
+	Art   bool
 }
 
 type cliCommand struct {

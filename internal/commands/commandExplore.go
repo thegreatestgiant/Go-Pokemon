@@ -32,8 +32,10 @@ func commandExplore(cfg *Config, args ...string) error {
 
 	cfg.Theme.Header.Printf("Exploring %s...\n", cfg.ThemeFunc.Location(areaResp.Name))
 	cfg.Theme.Info.Println("Found Pokemon:")
+	cfg.ExploreList = nil
 	for _, pokemon := range areaResp.PokemonEncounters {
 		fmt.Printf("  - %s\n", cfg.ThemeFunc.Pokemon(pokemon.Pokemon.Name))
+		cfg.ExploreList = append(cfg.ExploreList, pokemon.Pokemon.Name)
 	}
 
 	return nil

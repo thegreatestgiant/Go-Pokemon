@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"slices"
 	"time"
 )
 
@@ -14,7 +15,9 @@ func commandCatch(cfg *Config, args ...string) error {
 
 	pokemon := args[0]
 
-	// TODO: make sure it's in the explore list
+	if !slices.Contains(cfg.ExploreList, pokemon) {
+		return errors.New("invalid Pokemon. It is not in your explore list")
+	}
 
 	pokemonUrl := "https://pokeapi.co/api/v2/pokemon/" + pokemon
 	pokemonStruct, err := cfg.PokeapiClient.GetPokemon(pokemonUrl)
