@@ -277,7 +277,7 @@ This project was built using only the **Go standard library** — no third-party
 
 Potential features for future development:
 
-- [ ] **Persistent save data** — Write the Pokédex to a JSON file between sessions
+- [X] **Persistent save data** — Write the Pokédex to a JSON file between sessions
 - [ ] **Battle system** — Turn-based combat using actual move and stat data (already in the `Pokemon` struct)
 - [ ] **Shiny Pokémon** — Additional rare RNG layer on successful catches
 - [ ] **Pokémon release** — Remove a Pokémon from your Pokédex
