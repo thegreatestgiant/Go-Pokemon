@@ -49,7 +49,7 @@ type CLIThemeFunc struct {
 
 var DefaultColors = Colors{
 	Pokemon:   &RGB{R: 245, G: 194, B: 231}, // Pink
-	Prompt:    &RGB{R: 203, G: 166, B: 247}, // Purple
+	Prompt:    &RGB{R: 255, G: 0, B: 255},   // Purple
 	Header:    &RGB{R: 203, G: 166, B: 247}, // Purple
 	Info:      &RGB{R: 137, G: 180, B: 250}, // Blue
 	Highlight: &RGB{R: 250, G: 179, B: 135}, // Orange

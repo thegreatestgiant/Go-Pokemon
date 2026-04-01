@@ -42,7 +42,7 @@ func SaveSettings(cfg *commands.Config) bool {
 
 func loadSettings() *Settings {
 	settings := Settings{
-		DebugMode:    true,
+		DebugMode:    false,
 		ShowAsciiArt: true,
 	}
 
