@@ -1,12 +1,15 @@
 package commands
 
 import (
+	"bufio"
+
 	"github.com/thegreatestgiant/Go-Pokemon/internal/pokeapi"
 	"github.com/thegreatestgiant/Go-Pokemon/internal/theme"
 )
 
 type Config struct {
 	PokeapiClient pokeapi.Client
+	Scanner       *bufio.Scanner
 
 	Next     *string
 	Current  *string

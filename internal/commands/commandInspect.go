@@ -23,6 +23,7 @@ func commandInspect(cfg *Config, args ...string) error {
 		pokemon.PrintPokemonSprite()
 	}
 
+	fmt.Printf("%s %s\n", cfg.ThemeFunc.Info("Nickname:"), cfg.ThemeFunc.Pokemon(pokemon.NickName))
 	fmt.Printf("%s %s\n", cfg.ThemeFunc.Info("Name:"), cfg.ThemeFunc.Pokemon(pokemon.Name))
 	fmt.Printf("%s %v\n", cfg.ThemeFunc.Info("Height:"), cfg.ThemeFunc.Warning(pokemon.Height))
 	fmt.Printf("%s %v\n", cfg.ThemeFunc.Info("Weight:"), cfg.ThemeFunc.Warning(pokemon.Weight))
@@ -39,10 +40,14 @@ func commandInspect(cfg *Config, args ...string) error {
 }
 
 func (cfg *Config) findPokemon(name string) (pokeapi.Pokemon, bool) {
+	p, f := pokeapi.Pokemon{}, false
 	for _, pokemon := range cfg.Pokedex {
-		if pokemon.Name == name {
+		if pokemon.NickName == name {
 			return pokemon, true
+		} else if pokemon.Name == name {
+			p = pokemon
+			f = true
 		}
 	}
-	return pokeapi.Pokemon{}, false
+	return p, f
 }

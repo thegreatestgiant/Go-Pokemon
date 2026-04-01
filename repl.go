@@ -12,9 +12,9 @@ import (
 
 func startRepl(cfg *commands.Config) {
 	scanner := bufio.NewScanner(os.Stdin)
+	cfg.Scanner = scanner
 	for {
-		intro := "Pokemon > "
-		fmt.Printf("%s", cfg.ThemeFunc.Prompt(intro))
+		fmt.Printf("%s", cfg.ThemeFunc.Prompt("Pokemon > "))
 
 		scanner.Scan()
 		text := parseInput(scanner.Text())

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"slices"
+	"strings"
 	"time"
 )
 
@@ -38,8 +39,37 @@ func commandCatch(cfg *Config, args ...string) error {
 		return fmt.Errorf("failed to catch %s", cfg.ThemeFunc.Pokemon(pokemon))
 	}
 
-	cfg.Pokedex = append(cfg.Pokedex, pokemonStruct)
 	cfg.Theme.Success.Printf("%s %s\n", cfg.ThemeFunc.Pokemon(pokemon), cfg.ThemeFunc.Success("was caught!!"))
+	cfg.Theme.Prompt.Printf("What would you like to name your %s? ", pokemon)
+
+	var nickname string
+	if cfg.Scanner.Scan() {
+		nickname = cfg.Scanner.Text()
+	}
+
+	if nickname == "" {
+		nickname = numbered(cfg, pokemon)
+		cfg.Theme.Success.Printf("Got it! Sent %s to the Pokedex.\n", nickname)
+	} else {
+		cfg.Theme.Success.Printf("Got it! Sent %s to the Pokedex.\n", nickname)
+	}
+	pokemonStruct.NickName = nickname
+
+	cfg.Pokedex = append(cfg.Pokedex, pokemonStruct)
 
 	return nil
+}
+
+func numbered(cfg *Config, pokemonName string) string {
+	total := 0
+	for _, pokemon := range cfg.Pokedex {
+		if strings.EqualFold(pokemon.NickName, pokemonName) {
+			total++
+		}
+	}
+	if total == 0 {
+		return pokemonName
+	}
+	total++
+	return fmt.Sprintf("%s %d", pokemonName, total)
 }

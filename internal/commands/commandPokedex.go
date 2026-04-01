@@ -7,7 +7,7 @@ import (
 func commandPokedex(cfg *Config, args ...string) error {
 	cfg.Theme.Info.Println("Your Pokedex:")
 	for _, pokemon := range cfg.Pokedex {
-		fmt.Printf("  - %s\n", cfg.ThemeFunc.Pokemon(pokemon.Name))
+		fmt.Printf("  - %s\n", cfg.ThemeFunc.Pokemon(pokemon.NickName))
 	}
 	return nil
 }

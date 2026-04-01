@@ -44,6 +44,7 @@ type Pokemon struct {
 		} `json:"version_group_details"`
 	} `json:"moves"`
 	Name      string `json:"name"`
+	NickName  string `json:"nickname"`
 	Order     int    `json:"order"`
 	PastTypes []any  `json:"past_types"`
 	Species   struct {
