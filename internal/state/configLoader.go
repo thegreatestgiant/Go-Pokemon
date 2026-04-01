@@ -9,11 +9,13 @@ import (
 )
 
 func GetConfig() commands.Config {
-	appTheme := theme.LoadTheme()
-	appThemeFunc := theme.LoadThemeFunc()
+	settings := loadSettings()
 
-	debugging := false
-	showArt := true
+	appTheme := theme.LoadTheme(&settings.ThemeColors)
+	appThemeFunc := theme.LoadThemeFunc(&settings.ThemeColors)
+
+	debugging := settings.DebugMode
+	showArt := settings.ShowAsciiArt
 
 	pokedex := loadPokedex(debugging)
 

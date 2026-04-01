@@ -27,7 +27,7 @@ func startRepl(cfg *commands.Config) {
 
 		command, ok := avaliableCommands[commandName]
 		if !ok {
-			cfg.Theme.Error.Printf("Enter a valid command")
+			cfg.Theme.Error.Printf("Enter a valid command\n")
 			continue
 		}
 
@@ -44,6 +44,11 @@ func startRepl(cfg *commands.Config) {
 		saved := state.SavePokedex(cfg)
 		if !saved && cfg.Debug {
 			cfg.Theme.Error.Println("Didn't save pokedex")
+		}
+
+		saved = state.SaveSettings(cfg)
+		if !saved && cfg.Debug {
+			cfg.Theme.Error.Println("Didn't save settings")
 		}
 	}
 }
