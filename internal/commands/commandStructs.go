@@ -10,7 +10,7 @@ type Config struct {
 	Next          *string
 	Current       *string
 	Previous      *string
-	Pokedex       map[string]pokeapi.Pokemon
+	Pokedex       []pokeapi.Pokemon
 	Theme         *theme.CLITheme
 	ThemeFunc     *theme.CLIThemeFunc
 	Debug         bool

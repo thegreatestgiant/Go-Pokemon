@@ -32,7 +32,7 @@ func commandCatch(cfg *Config, args ...string) error {
 		return fmt.Errorf("failed to catch %s", cfg.ThemeFunc.Pokemon(pokemon))
 	}
 
-	cfg.Pokedex[pokemon] = pokemonStruct
+	cfg.Pokedex = append(cfg.Pokedex, pokemonStruct)
 	cfg.Theme.Success.Printf("%s %s\n", cfg.ThemeFunc.Pokemon(pokemon), cfg.ThemeFunc.Success("was caught!!"))
 
 	return nil
