@@ -36,6 +36,13 @@ func GetCommands() map[string]cliCommand {
 			Callback:    commandCatch,
 			priotity:    40,
 		},
+		"release": {
+			name:        "release",
+			argument:    " {Pokemon}",
+			description: "Releases Pokemon from your Pokedex. Use * to release all",
+			Callback:    commandRelease,
+			priotity:    42,
+		},
 		"inspect": {
 			name:        "inspect",
 			argument:    " {Pokemon}",

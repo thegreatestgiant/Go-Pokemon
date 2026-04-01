@@ -14,7 +14,7 @@ func commandInspect(cfg *Config, args ...string) error {
 
 	pokemonName := args[0]
 
-	pokemon, ok := cfg.findPokemon(pokemonName)
+	pokemon, _, ok := cfg.findPokemon(pokemonName)
 	if !ok {
 		return fmt.Errorf("you have not caught %s, catch %s to inspect", pokemonName, pokemonName)
 	}
@@ -39,15 +39,16 @@ func commandInspect(cfg *Config, args ...string) error {
 	return nil
 }
 
-func (cfg *Config) findPokemon(name string) (pokeapi.Pokemon, bool) {
-	p, f := pokeapi.Pokemon{}, false
-	for _, pokemon := range cfg.Pokedex {
+func (cfg *Config) findPokemon(name string) (pokeapi.Pokemon, int, bool) {
+	p, i, f := pokeapi.Pokemon{}, -1, false
+	for idx, pokemon := range cfg.Pokedex {
 		if pokemon.NickName == name {
-			return pokemon, true
+			return pokemon, idx, true
 		} else if pokemon.Name == name {
 			p = pokemon
+			i = idx
 			f = true
 		}
 	}
-	return p, f
+	return p, i, f
 }
