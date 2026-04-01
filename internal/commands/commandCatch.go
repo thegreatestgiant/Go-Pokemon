@@ -1,4 +1,4 @@
-package main
+package commands
 
 import (
 	"errors"
@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-func commandCatch(cfg *config, args ...string) error {
+func commandCatch(cfg *Config, args ...string) error {
 	if len(args) < 1 {
 		return errors.New("enter a {number/location} to explore")
 	}
 
 	pokemon := args[0]
 	pokemonUrl := "https://pokeapi.co/api/v2/pokemon/" + pokemon
-	pokemonStruct, err := cfg.pokeapiClient.GetPokemon(pokemonUrl)
+	pokemonStruct, err := cfg.PokeapiClient.GetPokemon(pokemonUrl)
 	if err != nil {
 		return err
 	}
@@ -22,18 +22,18 @@ func commandCatch(cfg *config, args ...string) error {
 	baseXP := pokemonStruct.BaseExperience
 	threshhold := 50
 	randNum := rand.Intn(pokemonStruct.BaseExperience)
-	if cfg.debug {
+	if cfg.Debug {
 		fmt.Println(baseXP, threshhold, randNum)
 	}
 
-	cfg.theme.Info.Printf("Throwing a Pokeball at %s...", cfg.themeFunc.Pokemon(pokemon))
+	cfg.Theme.Info.Printf("Throwing a Pokeball at %s...", cfg.ThemeFunc.Pokemon(pokemon))
 	time.Sleep(time.Second)
 	if randNum > threshhold {
-		return fmt.Errorf("failed to catch %s", cfg.themeFunc.Pokemon(pokemon))
+		return fmt.Errorf("failed to catch %s", cfg.ThemeFunc.Pokemon(pokemon))
 	}
 
-	cfg.pokedex[pokemon] = pokemonStruct
-	cfg.theme.Success.Printf("%s %s\n", cfg.themeFunc.Pokemon(pokemon), cfg.themeFunc.Success("was caught!!"))
+	cfg.Pokedex[pokemon] = pokemonStruct
+	cfg.Theme.Success.Printf("%s %s\n", cfg.ThemeFunc.Pokemon(pokemon), cfg.ThemeFunc.Success("was caught!!"))
 
 	return nil
 }

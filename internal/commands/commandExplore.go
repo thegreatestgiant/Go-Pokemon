@@ -1,4 +1,4 @@
-package main
+package commands
 
 import (
 	"errors"
@@ -6,14 +6,14 @@ import (
 	"strconv"
 )
 
-func commandExplore(cfg *config, args ...string) error {
+func commandExplore(cfg *Config, args ...string) error {
 	if len(args) < 1 {
 		return errors.New("enter a {number/location} to explore")
 	}
 
 	area := args[0]
 	if len(args[0]) < 3 {
-		resp, _, err := cfg.pokeapiClient.GetLocationAreas(cfg.current)
+		resp, _, err := cfg.PokeapiClient.GetLocationAreas(cfg.Current)
 		if err != nil {
 			return err
 		}
@@ -25,15 +25,15 @@ func commandExplore(cfg *config, args ...string) error {
 		area = resp.Results[areaNum].Name
 	}
 
-	areaResp, err := cfg.pokeapiClient.GetAreaResp(&area)
+	areaResp, err := cfg.PokeapiClient.GetAreaResp(&area)
 	if err != nil {
 		return err
 	}
 
-	cfg.theme.Header.Printf("Exploring %s...\n", cfg.themeFunc.Location(areaResp.Name))
-	cfg.theme.Info.Println("Found Pokemon:")
+	cfg.Theme.Header.Printf("Exploring %s...\n", cfg.ThemeFunc.Location(areaResp.Name))
+	cfg.Theme.Info.Println("Found Pokemon:")
 	for _, pokemon := range areaResp.PokemonEncounters {
-		fmt.Printf("  - %s\n", cfg.themeFunc.Pokemon(pokemon.Pokemon.Name))
+		fmt.Printf("  - %s\n", cfg.ThemeFunc.Pokemon(pokemon.Pokemon.Name))
 	}
 
 	return nil
