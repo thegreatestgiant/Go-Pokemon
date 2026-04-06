@@ -28,6 +28,7 @@ func startRepl(cfg *commands.Config) {
 		command, ok := avaliableCommands[commandName]
 		if !ok {
 			cfg.Theme.Error.Printf("Enter a valid command\n")
+			cfg.Theme.Error.Printf("Type 'help' to get a list of valid commands\n")
 			continue
 		}
 

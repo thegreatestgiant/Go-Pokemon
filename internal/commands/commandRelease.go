@@ -2,16 +2,15 @@ package commands
 
 import (
 	"fmt"
-	"strings"
 )
 
 func commandRelease(cfg *Config, args ...string) error {
 	if len(args) == 0 {
 		return fmt.Errorf("you must provide a pokemon name to release")
 	}
-	nickname := strings.Join(args, " ")
+	nickname := args
 
-	if nickname == "*" {
+	if nickname[0] == "*" {
 		loop := cfg.Pokedex
 		for _, p := range loop {
 			cfg.Theme.Success.Printf("Released %s!\n", p.NickName)

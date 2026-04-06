@@ -26,9 +26,11 @@ type Config struct {
 }
 
 type cliCommand struct {
-	name        string
-	argument    string
-	description string
-	Callback    func(*Config, ...string) error
-	priotity    int
+	name            string
+	argument        string
+	flags           string
+	flagDescription string
+	description     string
+	Callback        func(*Config, ...string) error
+	priotity        int
 }

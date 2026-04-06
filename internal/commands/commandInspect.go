@@ -3,8 +3,8 @@ package commands
 import (
 	"errors"
 	"fmt"
-
-	"github.com/thegreatestgiant/Go-Pokemon/internal/pokeapi"
+	"slices"
+	"strconv"
 )
 
 func commandInspect(cfg *Config, args ...string) error {
@@ -12,7 +12,19 @@ func commandInspect(cfg *Config, args ...string) error {
 		return errors.New("enter a pokemon to inspect")
 	}
 
-	pokemonName := args[0]
+	pokemonName, flag, flagArgs := parseFlags(args...)
+	moveFlags := []string{"m", "moves"}
+	maxFlags := 4
+	if flagArgs != nil {
+		n, err := strconv.Atoi(flagArgs[0])
+		if err != nil {
+			if cfg.Debug {
+				cfg.Theme.Error.Printf("Invalid flag argument: %s. Error: %s", flagArgs[0], err)
+			}
+			return err
+		}
+		maxFlags = n
+	}
 
 	pokemon, _, ok := cfg.findPokemon(pokemonName)
 	if !ok {
@@ -35,20 +47,15 @@ func commandInspect(cfg *Config, args ...string) error {
 	for _, val := range pokemon.Types {
 		fmt.Printf("  - %s\n", cfg.ThemeFunc.Location(val.Type.Name))
 	}
-
-	return nil
-}
-
-func (cfg *Config) findPokemon(name string) (pokeapi.Pokemon, int, bool) {
-	p, i, f := pokeapi.Pokemon{}, -1, false
-	for idx, pokemon := range cfg.Pokedex {
-		if pokemon.NickName == name {
-			return pokemon, idx, true
-		} else if pokemon.Name == name {
-			p = pokemon
-			i = idx
-			f = true
+	if flag != "" && slices.Contains(moveFlags, flag) {
+		cfg.Theme.Info.Println("Moves:")
+		for i, move := range pokemon.Moves {
+			if i >= maxFlags {
+				break
+			}
+			fmt.Printf("  - %s\n", cfg.ThemeFunc.Warning(move.Move.Name))
 		}
 	}
-	return p, i, f
+
+	return nil
 }

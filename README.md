@@ -280,9 +280,9 @@ Potential features for future development:
 - [X] **Persistent save data** — Write the Pokédex to a JSON file between sessions
 - [ ] **Battle system** — Turn-based combat using actual move and stat data (already in the `Pokemon` struct)
 - [ ] **Shiny Pokémon** — Additional rare RNG layer on successful catches
-- [ ] **Pokémon release** — Remove a Pokémon from your Pokédex
+- [x] **Pokémon release** — Remove a Pokémon from your Pokédex
 - [ ] **Pokémon evolution** — Trigger evolutions based on in-game conditions
-- [ ] **`inspect --moves` flag** — Display the full move list from the already-fetched data
+- [x] **`inspect --moves` flag** — Display the full move list from the already-fetched data
 - [x] **Colored terminal output** — Use ANSI codes or a lightweight package for a richer UX
 - [ ] **Interactive TUI** — Upgrade the REPL to a full terminal UI with [Bubble Tea](https://github.com/charmbracelet/bubbletea)
 

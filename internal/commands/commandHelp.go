@@ -17,7 +17,11 @@ func commandHelp(cfg *Config, args ...string) error {
 	cfg.Theme.Header.Println("Welcome To Pokemon")
 	cfg.Theme.Header.Println("Usage")
 	for _, cmd := range commandSlice {
-		fmt.Printf("  - %s%s: %s\n", cfg.ThemeFunc.Info(cmd.name), cfg.ThemeFunc.Highlight(cmd.argument), cmd.description)
+		if cmd.argument != "" {
+			fmt.Printf("  - %-15s %s: %s\n", cfg.ThemeFunc.Info(cmd.name), cfg.ThemeFunc.Highlight(cmd.argument), cmd.description)
+		} else {
+			fmt.Printf("  - %-15s: %s\n", cfg.ThemeFunc.Info(cmd.name), cmd.description)
+		}
 	}
 	fmt.Println()
 	return nil
