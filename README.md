@@ -9,20 +9,7 @@
 
 **A fully interactive Pokémon adventure — built in Go, played in your terminal.**
 
-```sh
-Pokemon > explore pastoria-city-area
-  Exploring pastoria-city-area...
-  Found Pokemon:
-    - tentacool
-    - tentacruel
-    - magikarp
-
-Pokemon > catch magikarp
-  Throwing a Pokeball at magikarp...
-  magikarp was caught!!
-  What would you like to name your magikarp? Splash
-  Got it! Sent Splash to the Pokedex.
-```
+![Gameplay demo](assets/demo.gif)
 
 </div>
 
