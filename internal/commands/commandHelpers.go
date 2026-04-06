@@ -30,9 +30,9 @@ func (cfg *Config) findPokemon(nameSplice []string) (pokeapi.Pokemon, int, bool)
 	name := strings.Join(nameSplice, " ")
 	p, i, f := pokeapi.Pokemon{}, -1, false
 	for idx, pokemon := range cfg.Pokedex {
-		if pokemon.NickName == name {
+		if strings.EqualFold(pokemon.NickName, name) {
 			return pokemon, idx, true
-		} else if pokemon.Name == name {
+		} else if strings.EqualFold(pokemon.Name, name) {
 			p = pokemon
 			i = idx
 			f = true
