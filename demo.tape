@@ -29,7 +29,7 @@ Type "Splash"
 Enter
 Sleep 2s
 
-Type "inspect splash"
+Type "inspect Splash"
 Enter
 Sleep 3s
 
