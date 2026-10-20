@@ -15,6 +15,24 @@
 
 ---
 
+## 🎓 Boot.dev course context
+
+The first version of this project (September 2023) followed Boot.dev's
+[Build a Pokedex in Go](https://www.boot.dev/courses/build-pokedex-cli-golang)
+guided project. Boot.dev provided the lessons, project spec, and CLI test harness;
+there was no starter implementation. I wrote the course version from scratch.
+
+The current version is a substantial expansion I built in March–April 2026.
+
+| Built during the course (Sept 2023) | Added later (Mar–Apr 2026) |
+|---|---|
+| REPL loop, PokéAPI client, `map`/`mapb`, `explore`, `catch`, `inspect`, `pokedex`, in-memory TTL cache | Package refactor, semantic color themes and JSON settings, debug mode, ASCII sprite rendering, gob-backed persistence, catch restrictions, nicknames, `release`, move inspection and flags, README and demo GIF |
+
+The 11 course commits established the core REPL and PokéAPI behavior. The 22 later
+commits are the refactor and feature work above.
+
+---
+
 ## 📋 Table of Contents
 
 - [Features](#-features)
